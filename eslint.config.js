@@ -7,6 +7,8 @@ export default antfu({
   rules: {
     'style/semi': ['error', 'never'],
     'perfectionist/sort-imports': 'off',
+    'vue/comma-dangle': 0,
+    'style/comma-dangle': 0
   },
   formatters: {
     /**
@@ -18,6 +20,6 @@ export default antfu({
      * Format HTML files
      * By default uses Prettier
      */
-    html: true,
-  },
+    html: true
+  }
 })
