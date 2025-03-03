@@ -36,7 +36,7 @@ export async function createContextmenu({
       top: `${targetMouse.y}px`,
       zIndex: 9999,
       position: 'fixed',
-      overflow: 'inherit'
+      overflow: 'inherit',
     })
   })
 
@@ -54,24 +54,28 @@ export async function createContextmenu({
 
   /** 检查给定的虚拟节点（VNode）是否超出视口范围 */
   function isElementOutOfViewport(node: VNode) {
-    const rect = node!.el!.getBoundingClientRect();
+    const rect = node!.el!.getBoundingClientRect()
 
     // 检查元素是否超出视口宽度
     if (rect.right > window.innerWidth) {
-      targetMouse.x = window.innerWidth - rect.width;
-    } else if (rect.left < 0) {
-      targetMouse.x = 0;
-    } else {
-      targetMouse.x = rect.x;
+      targetMouse.x = window.innerWidth - rect.width
+    }
+    else if (rect.left < 0) {
+      targetMouse.x = 0
+    }
+    else {
+      targetMouse.x = rect.x
     }
 
     // 检查元素是否超出视口高度
     if (rect.bottom > window.innerHeight) {
-      targetMouse.y = window.innerHeight - rect.height;
-    } else if (rect.top < 0) {
-      targetMouse.y = 0;
-    } else {
-      targetMouse.y = rect.y;
+      targetMouse.y = window.innerHeight - rect.height
+    }
+    else if (rect.top < 0) {
+      targetMouse.y = 0
+    }
+    else {
+      targetMouse.y = rect.y
     }
   }
 
@@ -80,7 +84,7 @@ export async function createContextmenu({
       {menus?.map?.(menuItem => (
         <ElMenuItem
           v-text={menuItem.text}
-          style='height:35px;font-size:12px'
+          style="height:35px;font-size:12px"
           onClick={() => {
             menuItem.click()
             close()

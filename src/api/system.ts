@@ -1,28 +1,28 @@
 export function getList() {
   return request({
     method: 'get',
-    url: '/api/user'
+    url: '/api/user',
   })
 }
 export function del(params: any) {
   return request({
     method: 'get',
     url: '/api/user',
-    params
+    params,
   })
 }
 
 export function getUser() {
   return request<any[]>({
     method: 'get',
-    url: '/api/user'
+    url: '/api/user',
   })
 }
 
 export function getAuth() {
   return request<any[]>({
     method: 'get',
-    url: '/api/auth'
+    url: '/api/auth',
   })
 }
 
@@ -30,7 +30,7 @@ export function create(params: any) {
   return request({
     method: 'get',
     url: '/api/user',
-    params
+    params,
   })
 }
 
@@ -38,6 +38,6 @@ export function edit(params: any) {
   return request({
     method: 'get',
     url: '/api/auth',
-    params
+    params,
   })
 }

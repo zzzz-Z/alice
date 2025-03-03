@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 export default createScopeStore(() => {
   const state = reactive({ num: 1 })

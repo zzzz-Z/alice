@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { ImportParams } from './index';
-import { ElMessage } from 'element-plus';
+import type { ImportParams } from './index'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps<ImportParams>()
 
-const list = ref<Params[]>([]);
+const list = ref<Params[]>([])
 function downTemplate() {}
 function change() {}
 
 async function save() {
-  const file = list.value[0]?.raw;
+  const file = list.value[0]?.raw
   if (!file) {
-    ElMessage.warning('请导入文件');
-    return;
+    ElMessage.warning('请导入文件')
+    return
   }
-  return props.request({ file });
+  return props.request({ file })
 }
 
-defineExpose({ save });
+defineExpose({ save })
 </script>
 
 <template>

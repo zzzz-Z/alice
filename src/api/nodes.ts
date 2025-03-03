@@ -56,7 +56,7 @@ export function createdNodes(data: Params) {
   return request({
     url: '/api/common/add/relationshipAndNode',
     method: 'post',
-    data
+    data,
   })
 }
 
@@ -64,7 +64,7 @@ export function updateNodes(data: Params) {
   return request({
     url: '/api/common/edit/ship/nodes',
     method: 'post',
-    data
+    data,
   })
 }
 
@@ -85,7 +85,7 @@ export function connectNode(data: Params) {
   return request({
     url: '/api/common/add/ship/nodes',
     method: 'post',
-    data
+    data,
   })
 }
 /**
@@ -97,6 +97,6 @@ export function delNode(params: Params) {
   return request({
     url: '/api/common/del/ship',
     method: 'get',
-    params
+    params,
   })
 }

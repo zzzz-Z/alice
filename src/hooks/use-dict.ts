@@ -1,5 +1,5 @@
-import { getDict } from '@/api/dict';
-import { reactive } from 'vue';
+import { getDict } from '@/api/dict'
+import { reactive } from 'vue'
 
 interface Dict {
   label: string
@@ -7,7 +7,7 @@ interface Dict {
   [key: string]: any
 }
 
-const dictStore = reactive<Record<string, Dict[]>>({});
+const dictStore = reactive<Record<string, Dict[]>>({})
 
 /**
  * 使用给定的类型数组初始化字典数据
@@ -19,18 +19,17 @@ const dictStore = reactive<Record<string, Dict[]>>({});
  * @returns 返回一个对象，其中包含初始化后的字典数据，键为类型，值为对应的数据列表
  */
 export function useDict<T extends string[]>(types: [...T]): Record<T[number], Dict[]> {
-  const a = 1
   // 在组件挂载后，为每个类型获取字典数据
   types.forEach(async (type) => {
     // 检查字典数据是否已经存在，如果不存在则发起请求
     if (!dictStore[type]) {
-      const res = await getDict({ type });
+      const res = await getDict({ type })
       // 如果请求成功，将数据存储在字典中
       if (res && res.data) {
-        dictStore[type] = res.data;
+        dictStore[type] = res.data
       }
     }
-  });
+  })
 
   // 返回初始化后的字典数据对象
   return dictStore

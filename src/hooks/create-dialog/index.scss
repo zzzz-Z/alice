@@ -11,7 +11,9 @@
     justify-content: space-between;
     height: 48px;
     padding: 0 16px;
-    box-shadow: 0 0 1px rgb(2 24 21 / 16%), 0 4px 12px rgb(2 24 21 / 3%);
+    box-shadow:
+      0 0 1px rgb(2 24 21 / 16%),
+      0 4px 12px rgb(2 24 21 / 3%);
   }
 
   .el-dialog__body {
@@ -24,10 +26,10 @@
 
   .el-dialog__footer {
     padding: 8px;
-    box-shadow: 0 4px 12px rgb(2 24 21 / 3%), 0 0 1px rgb(2 24 21 / 16%);
+    box-shadow:
+      0 4px 12px rgb(2 24 21 / 3%),
+      0 0 1px rgb(2 24 21 / 16%);
   }
-
-
 }
 
 .create-dialog.__no-footer {

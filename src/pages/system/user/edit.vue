@@ -1,7 +1,7 @@
 <script setup lang='tsx'>
-import type { FormInstance } from 'element-plus';
-import * as role from '@/api/role';
-import * as api from '@/api/user';
+import type { FormInstance } from 'element-plus'
+import * as role from '@/api/role'
+import * as api from '@/api/user'
 
 const props = defineProps<{ row: Params }>()
 
@@ -10,8 +10,8 @@ const model = reactive<Params>({ ...props.row })
 const [roles] = useAsyncData(role.getList, {
   transform: d => ({
     label: d.name,
-    value: d._id
-  })
+    value: d._id,
+  }),
 })
 
 onMounted(async () => {

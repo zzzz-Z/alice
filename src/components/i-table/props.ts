@@ -1,5 +1,5 @@
-import type { PropType } from 'vue';
-import baseTableProps from 'element-plus/es/components/table/src/table/defaults';
+import type { PropType } from 'vue'
+import baseTableProps from 'element-plus/es/components/table/src/table/defaults'
 
 interface TableProps<T = any> {
   /** 包裹table的父级元素 用于动态计算table高度 */

@@ -1,6 +1,6 @@
 <script setup lang='tsx'>
-import type { FormInstance } from 'element-plus';
-import * as api from '@/api/authority';
+import type { FormInstance } from 'element-plus'
+import * as api from '@/api/authority'
 
 const { row, isAdd } = defineProps<{
   row?: Params

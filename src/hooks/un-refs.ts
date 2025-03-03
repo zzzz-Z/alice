@@ -1,4 +1,4 @@
-import { UnwrapRef } from "vue"
+import type { UnwrapRef } from 'vue'
 
 /**
  * 将一个对象中所有的 ref 属性转换为普通属性

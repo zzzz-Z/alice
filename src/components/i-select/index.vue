@@ -1,12 +1,12 @@
 <script setup lang='tsx'>
-import { ElSelect } from 'element-plus';
+import { ElSelect } from 'element-plus'
 
 defineProps<{ options: any[] }>()
 defineSlots<InstanceType<typeof ElSelect>['$slots']>()
 </script>
 
 <template>
-  <el-select>
+  <ElSelect>
     <template v-for="(_, name) in $slots" #[name]>
       <slot :name="name" />
     </template>
@@ -16,7 +16,7 @@ defineSlots<InstanceType<typeof ElSelect>['$slots']>()
       :label="item.label"
       :value="item.value"
     />
-  </el-select>
+  </ElSelect>
 </template>
 
 <style lang='scss' scoped>

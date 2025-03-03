@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SwitchInstance } from 'element-plus';
-import Dark from '@/components/icons/dark.vue';
-import Light from '@/components/icons/light.vue';
-import { useDark, useToggle } from '@vueuse/core';
-import { ref, watch } from 'vue';
+import type { SwitchInstance } from 'element-plus'
+import Dark from '@/components/icons/dark.vue'
+import Light from '@/components/icons/light.vue'
+import { useDark, useToggle } from '@vueuse/core'
+import { ref, watch } from 'vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -18,7 +18,7 @@ watch(
   () => darkMode.value,
   () => {
     toggleDark()
-  }
+  },
 )
 </script>
 

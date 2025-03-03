@@ -1,8 +1,8 @@
 <script setup lang='tsx'>
-import type { ButtonProps, ElTooltipProps, MessageOptions, PopconfirmProps } from 'element-plus';
-import { isObject } from '@vueuse/core';
-import { ElMessageBox } from 'element-plus';
-import { mergeProps } from 'vue';
+import type { ButtonProps, ElTooltipProps, MessageOptions, PopconfirmProps } from 'element-plus'
+import { isObject } from '@vueuse/core'
+import { ElMessageBox } from 'element-plus'
+import { mergeProps } from 'vue'
 
 type Props = Partial<ButtonProps> & {
   tooltip?: string | Partial<ElTooltipProps>
@@ -17,14 +17,14 @@ const slots = defineSlots()
 const attrs = useAttrs()
 const loading = ref(false)
 const tooltipRef = ref()
- 
+
 const tooltipProps = computed(() =>
   isObject(tooltip)
     ? tooltip
-    : { effect: 'dark', placement: 'top', content: tooltip }
+    : { effect: 'dark', placement: 'top', content: tooltip },
 )
 
-function click(evt?: Event,) {
+function click(evt?: Event) {
   tooltipRef.value?.hide?.()
   return onClick?.(evt, loading)
 }
@@ -32,17 +32,18 @@ function click(evt?: Event,) {
 async function customClick(evt: MouseEvent) {
   try {
     if (msgBox) {
-      msgBoxConfirm();
-    } else {
-      loading.value = true;
-      await click(evt);
+      msgBoxConfirm()
+    }
+    else {
+      loading.value = true
+      await click(evt)
     }
   }
   catch (error) {
-    console.error(error);
+    console.error(error)
   }
   finally {
-    loading.value = false;
+    loading.value = false
   }
 }
 
@@ -64,7 +65,7 @@ function msgBoxConfirm() {
         done()
       }
     },
-    ...msgBox
+    ...msgBox,
   }).catch(() => {})
 }
 
@@ -74,7 +75,7 @@ function RenderBtn(_props: Params) {
       {...mergeProps(props, attrs, _props)}
       loading={loading.value}
       v-slots={{
-        default: slots.default
+        default: slots.default,
       }}
     />
   )

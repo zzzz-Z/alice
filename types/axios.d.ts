@@ -1,4 +1,4 @@
-export { };
+export { }
 declare module 'axios' {
   interface AxiosResponse<T> {
     data: T

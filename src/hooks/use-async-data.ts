@@ -29,7 +29,7 @@ interface Options<D, T> {
  */
 export function useAsyncData<D, T = any>(
   request: Request<T>,
-  options: Options<D, T> = {}
+  options: Options<D, T> = {},
 ) {
   // 解构配置选项，包括是否立即发起请求和数据转换函数
   const { immediate = true, transform = d => d, resolve, reject, initialValue } = options
@@ -44,19 +44,21 @@ export function useAsyncData<D, T = any>(
    * 发起 HTTP 请求的异步函数
    */
   async function loadData(...args: any[]) {
-    loading.value = true;
+    loading.value = true
     try {
-      const res = await request(...args);
+      const res = await request(...args)
       if (res.code === 200) {
         const d: any = res.data
         data.value = isArray(d) ? d.map(item => transform(item)) : transform(d)
         resolve?.(res)
       }
       return res
-    } catch (error) {
-      console.error(error);
+    }
+    catch (error) {
+      console.error(error)
       reject?.()
-    } finally {
+    }
+    finally {
       loading.value = false
     }
   }
@@ -68,6 +70,6 @@ export function useAsyncData<D, T = any>(
   return [
     data,
     loadData,
-    loading
+    loading,
   ] as [Ref<Data<D, T>>, Request<T>, Ref<boolean>]
 }

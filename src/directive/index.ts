@@ -1,17 +1,17 @@
-import type { App, Directive, DirectiveBinding } from 'vue';
-import { useStore } from '@/store';
+import type { App, Directive, DirectiveBinding } from 'vue'
+import { useStore } from '@/store'
 
-const { permissions } = useStore();
+const { permissions } = useStore()
 
 const permission: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
-    const { value, arg } = binding;
+    const { value, arg } = binding
     if (!permissions.value.includes(value || arg)) {
-      el.parentNode && el.parentNode.removeChild(el);
+      el.parentNode && el.parentNode.removeChild(el)
     }
-  }
-};
+  },
+}
 
 export default function (app: App) {
-  app.directive('perm', permission);
+  app.directive('perm', permission)
 }

@@ -12,6 +12,6 @@ export function createUpload(props: ImportParams) {
     title: '导入文件',
     okText: '确定',
     afterSave: props.success,
-    render: () => h(Index, props)
+    render: () => h(Index, props),
   })
 }

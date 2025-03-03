@@ -1,6 +1,6 @@
 <script setup lang='tsx'>
-import type { FormInstance } from 'element-plus';
-import * as api from '@/api/role';
+import type { FormInstance } from 'element-plus'
+import * as api from '@/api/role'
 
 const props = defineProps<{
   row: Params

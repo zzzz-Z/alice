@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { saveAs } from 'file-saver';
+import axios from 'axios'
+import { saveAs } from 'file-saver'
 
 const request = axios.create({
   baseURL: '/',
@@ -15,7 +15,7 @@ request.interceptors.response.use((res) => {
     if (res.code === 200) {
       const filename = res?.headers?.['content-disposition']
         ?.split(';')?.[1]
-        ?.split('filename=')?.[1];
+        ?.split('filename=')?.[1]
       saveAs(res.data, filename)
     }
     return res
