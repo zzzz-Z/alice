@@ -3,10 +3,9 @@ import type { PageHeaderInstance, TableInstance } from 'element-plus'
 import type { Slot } from 'vue'
 import { forwardRef } from '@/hooks/forward-ref'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import { isObject } from '@vueuse/core'
 import { ElCol, ElMessage, ElTable, ElTableColumn } from 'element-plus'
 import saveAs from 'file-saver'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isObject } from 'lodash'
 import { cloneVNode, createVNode } from 'vue'
 import { tableProps } from './props'
 
@@ -31,14 +30,7 @@ const {
 
 const emit = defineEmits(ElTable.emits!)
 
-const slots = defineSlots<Record<
-  | 'action'
-  | 'search'
-  | 'append'
-  | 'default'
-  | 'header',
-  Slot
->>()
+const slots = defineSlots<Record<'action' | 'search' | 'append' | 'default' | 'header', Slot>>()
 
 const listener = ElTable.emits!.reduce(
   (events, event) => ({ ...events, [event]: (...args: any[]) => emit(event, ...args) }),

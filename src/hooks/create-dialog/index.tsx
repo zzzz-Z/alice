@@ -1,11 +1,11 @@
 import type { AnyFn, Fn } from '@vueuse/core'
 import type { DialogProps } from 'element-plus'
-import type { CSSProperties, VNode } from 'vue'
-import { stringifyStyle } from '@vue/shared'
 import { ElButton, ElConfigProvider, ElDialog, ElMessage } from 'element-plus'
+import type { CSSProperties, VNode } from 'vue'
+import { isVNode, render } from 'vue'
+import { stringifyStyle } from '@vue/shared'
 import zhCn from 'element-plus/es/locale/lang/zh-cn.mjs'
 import { isUndefined } from 'lodash'
-import { isVNode, render } from 'vue'
 import './index.scss'
 
 interface Props extends DialogProps {
@@ -84,7 +84,7 @@ export function createDialog({
     else {
       ElMessage.error(res.msg || '保存失败。')
     }
-  };
+  }
 
   async function setBodyStyle() {
     await nextTick()

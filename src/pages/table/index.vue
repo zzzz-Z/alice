@@ -16,6 +16,8 @@ onMounted(() => {
 })
 
 function click() {
+  console.log(table.value?.$el)
+
   table.value?.getData()
 }
 </script>
