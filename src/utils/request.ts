@@ -2,7 +2,7 @@ import axios from 'axios'
 import { saveAs } from 'file-saver'
 
 const request = axios.create({
-  baseURL: '/',
+  baseURL: '/dev-api',
   timeout: 10000,
 })
 

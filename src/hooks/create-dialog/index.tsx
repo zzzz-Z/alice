@@ -64,7 +64,11 @@ export function createDialog({
     if (!request) {
       return
     }
-    await validate?.()
+    try {
+      await validate?.()
+    } catch (error) {
+      return error
+    }
     state.loading = true
     const res = await request()?.finally?.(() => {
       state.loading = false

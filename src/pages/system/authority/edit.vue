@@ -1,6 +1,7 @@
 <script setup lang='tsx'>
-import type { FormInstance } from 'element-plus'
-import * as api from '@/api/authority'
+import type { FormInstance } from 'element-plus';
+import * as api from '@/api/authority';
+import { routes } from 'vue-router/auto-routes';
 
 const { row, isAdd } = defineProps<{
   row?: Params
@@ -16,6 +17,22 @@ const types = [
   { label: '菜单', value: 2 },
   { label: '按钮', value: 3 },
 ]
+
+const options = flat(routes)
+  .filter(r => r.component)
+  .map((r) => {
+    const regex = /import\("([^?]+)(\?.*)?"\)/
+    const match = String(r.component).match(regex)
+    const path = match?.[1]
+    return {
+      label: path,
+      value: path,
+    }
+  })
+
+function flat(arr = routes): any[] {
+  return arr.flatMap(({ children = [], ...r }) => [r, ...flat(children)])
+}
 
 async function save() {
   return isAdd
@@ -38,8 +55,7 @@ defineExpose({ save, form })
     <el-select-v2
       v-model="model.type"
       prop="type"
-      required
-      :options="types"
+      required :options="types"
       label="类型"
     />
     <el-input
@@ -55,9 +71,10 @@ defineExpose({ save, form })
       required
       label="路由地址"
     />
-    <el-input
+    <el-select-v2
       v-if="model.type === 2"
       v-model="model.component"
+      :options="options"
       prop="component"
       required
       label="组件路径"
@@ -71,6 +88,4 @@ defineExpose({ save, form })
   </IForm>
 </template>
 
-<style lang='scss' scoped>
-
-</style>
+<style lang='scss' scoped></style>

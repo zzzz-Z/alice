@@ -6,6 +6,10 @@ export default antfu({
   vue: true,
   lessOpinionated: true,
   plugins: [],
+  formatters: {
+    css: true,
+    html: true
+  },
   rules: {
     'no-console': ['warn'],
     'style/semi': ['error', 'never'],
@@ -21,9 +25,5 @@ export default antfu({
     'vue/block-order': 'off',
     'vue/component-name-in-template-casing': 'off',
     'vue/require-default-prop': 'off',
-  },
-  formatters: {
-    css: true,
-    html: true
   }
 })

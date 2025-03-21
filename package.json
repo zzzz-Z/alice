@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@antv/g6": "^5.0.44",
     "@element-plus/icons-vue": "^2.3.1",
     "@iconify/vue": "^4.1.2",
     "@unocss/eslint-plugin": "66.1.0-beta.3",
@@ -33,7 +34,6 @@
     "modern-screenshot": "^4.5.5",
     "nprogress": "^0.2.0",
     "vue": "^3.5.13",
-    "vue-echarts": "^7.0.3",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {

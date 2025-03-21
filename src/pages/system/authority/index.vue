@@ -33,7 +33,7 @@ function openEdit(row?: Params, isAdd: boolean = true) {
   createDialog({
     title: !isAdd ? '编辑' : '新增',
     render: () => <Edit row={row} isAdd={isAdd} />,
-    afterSave: () => table.value.getData(),
+    afterSave: () => table.value?.getData(),
   })
 }
 
@@ -45,7 +45,7 @@ async function del(row?: Params) {
   })
   const res = await api.del(row)
   if (!res.error) {
-    table.value.getData()
+    table.value?.getData()
     ElMessage.success('删除成功。')
   }
 }

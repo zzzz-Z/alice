@@ -13,7 +13,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     autoRouter({
-      // extensions: ['.page.vue'],
+      // extensions: ['index.vue'],
       dts: 'types/typed-router.d.ts',
     }),
     vue(),
@@ -52,10 +52,10 @@ export default defineConfig({
     port: 3000,
     hmr: true,
     proxy: {
-      '/api': {
+      '/dev-api': {
         changeOrigin: true, // 使用代理服务器的原始主机名称
-        target: 'https://echarts.apache.org',
-        rewrite: path => path.replace(/^\/api/, ''),
+        target: 'http://10.61.128.46:10010',
+        rewrite: path => path.replace(/^\/dev-api/, ''),
       },
     },
   },
