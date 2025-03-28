@@ -7,6 +7,8 @@ import Edit from './edit.vue'
 
 const table = ref<ITableInstance>()
 const queryParams = reactive<Params>({})
+const ctx = getCurrentInstance()!
+ctx.proxy!.test = '1'
 
 const columns = ref<ITableColumn[]>([
   { label: '用户名', prop: 'username' },
@@ -34,7 +36,7 @@ function openEdit(row?: any) {
     modalClass: 'system-dialog',
     title: row ? '编辑' : '新增',
     render: () => <Edit row={row} />,
-    afterSave: table.value.getData,
+    afterSave: table.value?.getData,
   }) // 打开编辑页面
 }
 
@@ -47,7 +49,7 @@ function openPassword(row?: any) {
   createDialog({
     width: 400,
     title: row ? '编辑' : '新增',
-    afterSave: table.value.getData,
+    afterSave: table.value?.getData,
     render: () => (
       <IForm span={24} model={model}>
         <el-input
@@ -71,7 +73,7 @@ async function del(row?: Params) {
   })
   const res = await api.del(row)
   if (!res.error) {
-    table.value.getData()
+    table.value?.getData()
     ElMessage.success('删除成功。')
   }
 }

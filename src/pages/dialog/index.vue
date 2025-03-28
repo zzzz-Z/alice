@@ -29,7 +29,4 @@ async function open2() {
   <el-button type="success" @click="open1">
     表单弹窗
   </el-button>
-  <Button type="primary" :msg-box="{ message: 'zcc' }" @click="open2">
-    button
-  </Button>
 </template>

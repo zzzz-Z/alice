@@ -1,7 +1,7 @@
 <script setup lang='tsx'>
-import type { FormInstance } from 'element-plus'
-import * as role from '@/api/role'
-import * as api from '@/api/user'
+import type { FormInstance } from 'element-plus';
+import * as role from '@/api/role';
+import * as api from '@/api/user';
 
 const props = defineProps<{ row: Params }>()
 
@@ -15,12 +15,12 @@ const [roles] = useAsyncData(role.getList, {
 })
 
 onMounted(async () => {
-  if (props.row) {
-    const res = await api.getList({ _id: props.row._id })
-    if (!res.error) {
-      model.role_ids = res.data.roles.map(d => d._id)
-    }
-  }
+  // if (props.row) {
+  //   const res = await api.getList({ _id: props.row._id })
+  //   if (!res.error) {
+  //     model.role_ids = res.data.roles.map(d => d._id)
+  //   }
+  // }
 })
 
 async function save() {
@@ -34,7 +34,6 @@ defineExpose({ save, form })
   <IForm ref="form" :model="model" :span="24">
     <el-input
       v-model="model.username"
-      prop="username"
       required
       label="用户名"
     />
@@ -42,7 +41,6 @@ defineExpose({ save, form })
       v-if="!row"
       v-model="model.password"
       required
-      prop="password"
       label="密码"
       type="password"
       show-password
@@ -50,7 +48,6 @@ defineExpose({ save, form })
     <el-select-v2
       v-model="model.role_ids"
       multiple
-      prop="role_ids"
       :options="roles || []"
       required
       label="角色"

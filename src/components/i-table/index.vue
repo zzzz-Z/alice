@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
-import type { PageHeaderInstance, TableInstance } from 'element-plus'
 import type { Slot } from 'vue'
-import { forwardRef } from '@/hooks/forward-ref'
+import type { PageHeaderInstance, TableInstance } from 'element-plus'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { ElCol, ElMessage, ElTable, ElTableColumn } from 'element-plus'
 import saveAs from 'file-saver'
@@ -17,7 +16,6 @@ const {
   pagination = true,
   index = true,
   height,
-  container,
   queryParams = {},
   exportCfg,
   importCfg,
@@ -25,6 +23,7 @@ const {
   data = [],
   rowKey = 'id',
   requestCfg,
+  style,
   ...props
 } = defineProps(tableProps)
 
@@ -68,7 +67,7 @@ const [isUnfold, toggle] = useToggle()
 
 const store = ref<Params>({})
 
-const selection = computed({
+const selection = computed<Params[]>({
   get: () => store.value.states.selection,
   set: v => store.value.states.selection = v,
 })
@@ -259,7 +258,7 @@ defineExpose(forwardRef(table, {
 </script>
 
 <template>
-  <div ref="root" class="i-table">
+  <div ref="root" :style="style" class="i-table">
     <!-- 渲染表头插槽 -->
     <div v-if="slots.header" ref="header" class="table-header">
       <slot name="header" />
@@ -285,7 +284,7 @@ defineExpose(forwardRef(table, {
     </el-row>
     <!-- 渲染操作区域 -->
     <el-card :body-style="{ padding: '10px 10px 0' }">
-      <template v-if="slots.action() || exportCfg || importCfg" #header>
+      <template v-if="slots.action?.() || exportCfg || importCfg" #header>
         <div ref="action" class="table-action">
           <RenderAction />
           <el-button v-if="exportCfg" type="primary" plain @click="exportData">

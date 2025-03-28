@@ -46,7 +46,6 @@ interface TableProps<T = any> {
 export const tableProps = {
   ...baseTableProps,
   index: Boolean,
-  container: [String, Object] as PropType<TableProps['container']>,
   pagination: Boolean,
   boolean: Boolean,
   columns: Array as PropType<TableProps['columns']>,

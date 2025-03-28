@@ -4,11 +4,10 @@ import type { ElTableColumn, FormItemProps, FormItemRule } from 'element-plus'
 export { }
 
 declare global {
-
-  type Params = Record<string, any>
-  type ITableInstance = InstanceType<typeof ITable>
-  type IFormInstance = InstanceType<typeof IForm>
-  type ITableColumn<T = Params> = InstanceType<typeof ElTableColumn>['$props'] & {
+  export type Params = Record<string, any>
+  export type ITableInstance = InstanceType<typeof ITable>
+  export type IFormInstance = InstanceType<typeof IForm>
+  export type ITableColumn<T = Params> = InstanceType<typeof ElTableColumn>['$props'] & {
     show?: () => boolean
     prop?: string
     columns?: ITableColumn<T>[]
@@ -16,7 +15,7 @@ declare global {
     renderDefault?: any
   }
 
-  interface FormItemOption extends Partial<FormItemProps> {
+  export interface FormItemOption extends Partial<FormItemProps> {
     span?: number
     label?: string
     show?: () => boolean
@@ -24,13 +23,6 @@ declare global {
     rule?: FormItemRule
     validator?: FormItemRule['validator']
     render: () => any
-  }
-
-  export {
-    FormItemOption,
-    IFormInstance,
-    ITableColumn,
-    ITableInstance,
-    Params,
+    [string: string]: any
   }
 }

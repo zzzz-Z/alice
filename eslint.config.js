@@ -11,12 +11,12 @@ export default antfu({
     html: true
   },
   rules: {
-    'no-console': ['warn'],
-    'style/semi': ['error', 'never'],
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'no-console': 'warn',
     'vue/no-v-text-v-html-on-component': 'off',
     'perfectionist/sort-imports': 'off',
-    'vue/comma-dangle': 0,
-    'style/comma-dangle': 0,
+    'vue/comma-dangle': 'off',
+    'style/comma-dangle': 'off',
     'style/jsx-quotes': 'off',
     'import/order': 'off',
     'antfu/if-newline': 'off',

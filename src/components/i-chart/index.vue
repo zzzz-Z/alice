@@ -2,7 +2,6 @@
 import type { ChartEvents, Props } from './type';
 import * as echarts from 'echarts';
 import { isNumber } from 'lodash';
-import 'echarts-gl';
 
 const { options, width, height, theme, initOption, ...props } = defineProps<Props>()
 const chartRef = ref<echarts.ECharts>()

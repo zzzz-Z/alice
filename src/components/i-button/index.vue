@@ -2,6 +2,7 @@
 import type { ButtonProps, ElTooltipProps, MessageOptions, PopconfirmProps } from 'element-plus'
 import { isObject } from '@vueuse/core'
 import { ElMessageBox } from 'element-plus'
+import type { Ref } from 'vue'
 import { mergeProps } from 'vue'
 
 type Props = Partial<ButtonProps> & {
@@ -33,16 +34,13 @@ async function customClick(evt: MouseEvent) {
   try {
     if (msgBox) {
       msgBoxConfirm()
-    }
-    else {
+    } else {
       loading.value = true
       await click(evt)
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error)
-  }
-  finally {
+  } finally {
     loading.value = false
   }
 }

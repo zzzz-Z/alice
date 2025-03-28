@@ -4,7 +4,7 @@ import type { ConcreteComponent, Slot, VNode } from 'vue'
 import { InfoFilled } from '@element-plus/icons-vue'
 import { formItemProps } from 'element-plus'
 import { isString, isUndefined } from 'lodash'
-import { cloneVNode, Comment, Fragment, mergeProps } from 'vue'
+import { cloneVNode, Comment, Fragment } from 'vue'
 
 type Props = Partial<FormProps> & {
   options?: FormItemOption[]
@@ -30,13 +30,13 @@ const form = ref<FormInstance>()
  * @param _props 表单项配置对象
  * @returns 返回包含消息和节点的对象
  */
-function getMsg(_props: FormItemOption) {
-  const node: VNode = _props.render?.()
+function getPlaceholder(_props: FormItemOption) {
+  const node: VNode = _props.node || _props.render?.()
   const componentName = (node.type as ConcreteComponent).name?.toLocaleLowerCase()
   const prefix = componentName ? (componentName?.includes('input') ? '请输入' : '请选择') : ''
   const label = _props.label || node.props?.label
-  const msg = node.props?.placeholder || (prefix ? prefix + label : '')
-  return { msg, node }
+  const placeholder = node.props?.placeholder || (prefix ? prefix + label : '')
+  return placeholder
 }
 
 /**
@@ -58,17 +58,33 @@ function removeUndefinedProps(obj: Params): Params {
  */
 function formatItemProps({ rule, required, validator, ..._props }: FormItemOption) {
   const propsKeys = Object.keys(formItemProps)
-  const itemProps: Params = {}
   const _required = !isUndefined(required) && required !== false
+
+  const prop = (_props as any)['onUpdate:modelValue']
+    ?.toString()
+    .replace(/\(\$event\)\s*=>\s*\$setup\.|\s*=\s*\$event/g, '')
+    .split('.')
+    .slice(1)
+    .join('.')
+
   const rules = removeUndefinedProps({
-    message: _required && !validator ? getMsg(_props).msg : undefined,
+    message: _required && !validator ? getPlaceholder(_props) : undefined,
     required: _required,
     trigger: ['blur', 'change'],
     validator,
     ...rule,
   })
-  propsKeys.forEach(key => itemProps[key] = (_props as Params)[key])
-  return mergeProps(itemProps, { rules })
+
+  const itemProps: Params = { prop, rules }
+
+  propsKeys.forEach((key) => {
+    const v = (_props as Params)[key]
+    if (!isUndefined(v)) {
+      itemProps[key] = v
+    }
+  })
+
+  return itemProps
 }
 
 /**
@@ -77,30 +93,30 @@ function formatItemProps({ rule, required, validator, ..._props }: FormItemOptio
  * @returns 返回渲染后的节点
  */
 function RenderNode(_props: FormItemOption) {
-  const { node, msg } = getMsg(_props)
-
-  return isString(node.type)
-    ? node
-    : cloneVNode(node, {
-        teleported: false,
-        clearable: true,
-        filterable: true,
-        placeholder: msg,
-      })
+  const node: VNode = _props.node || _props.render?.()
+  const params = {
+    teleported: false,
+    clearable: true,
+    filterable: true,
+    placeholder: getPlaceholder(_props),
+  }
+  return isString(node.type) ? node : cloneVNode(node, params)
 }
 
 /**
  * 将插槽内容转换为表单项选项数组
  * 此函数用于处理默认插槽中的节点，过滤掉注释节点，并将剩余节点的属性和渲染方法转换为FormItemOption对象
  */
-function slotToOptions(): FormItemOption[] {
+function slotToOptions() {
   return slots
-    .default!()
+    .default?.()
     .filter(node => node.type !== Comment)
     // 使用 template 包裹的节点 <template v-if="false" />
     .flatMap(node => node.type === Fragment ? node.children : node)
     .map((node: any) => ({
       ...node.props,
+      node,
+      type: node.type,
       render: () => node,
     }))
 }
@@ -109,16 +125,17 @@ defineExpose(forwardRef(form))
 </script>
 
 <template>
-  <el-form v-bind="props" ref="form" class="i-form" :show-message :label-width>
+  <ElForm v-bind="props" ref="form" class="i-form" :show-message :label-width>
     <!-- 行组件，设置栏间距 -->
-    <el-row :gutter="gutter">
+    <ElRow :gutter="gutter">
       <!-- 遍历表单项配置，生成表单项 -->
       <template v-for="(item, _n) in slots.default ? slotToOptions() : options" :key="_n">
-        <el-col v-if="item.show?.() !== false" :span="item.span || span">
-          <el-form-item v-bind="formatItemProps(item)">
+        <ElCol v-if="item.show?.() !== false" :span="item.span || span">
+          <RenderNode v-if="!isUndefined(item.block) && !isString(item.type) " v-bind="item" />
+          <ElFormItem v-else v-bind="formatItemProps(item)">
             <template #label>
               {{ item.label }}
-              <el-tooltip
+              <ElTooltip
                 v-if="item.tooltip"
                 effect="dark"
                 popper-class="form-label-tooltip"
@@ -126,18 +143,18 @@ defineExpose(forwardRef(form))
                 placement="top"
                 raw-content
               >
-                <el-icon>
+                <ElIcon>
                   <InfoFilled />
-                </el-icon>
-              </el-tooltip>
+                </ElIcon>
+              </ElTooltip>
             </template>
             <!-- 渲染表单项组件 -->
             <RenderNode v-bind="item" />
-          </el-form-item>
-        </el-col>
+          </ElFormItem>
+        </ElCol>
       </template>
-    </el-row>
-  </el-form>
+    </ElRow>
+  </ElForm>
 </template>
 
 <style lang="scss">
