@@ -106,6 +106,7 @@ function contextmenu() {
         label="角色"
       />
       <el-input v-model="queryParams.email" label="邮箱" />
+      <el-input v-model="queryParams.email" label="邮箱" />
     </template>
   </ITable>
 </template>

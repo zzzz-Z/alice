@@ -52,20 +52,6 @@ onMounted(() => {
     },
     layout: {
       type: 'd3-force',
-      link: {
-        distance: (d) => {
-          if (d.source.id === 'node0') {
-            return 100
-          }
-          return 30
-        },
-        strength: (d) => {
-          if (d.source.id === 'node1' || d.source.id === 'node2' || d.source.id === 'node3') {
-            return 0.7
-          }
-          return 0.1
-        },
-      },
       manyBody: {
         strength: (d) => {
           if (d.isLeaf) {

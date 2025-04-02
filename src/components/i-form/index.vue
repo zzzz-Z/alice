@@ -15,7 +15,7 @@ type Props = Partial<FormProps> & {
 const {
   showMessage = true,
   labelWidth = 'auto',
-  span = 12,
+  span = 24,
   gutter = 16,
   options,
   ...props
@@ -110,9 +110,9 @@ function RenderNode(_props: FormItemOption) {
 function slotToOptions() {
   return slots
     .default?.()
-    .filter(node => node.type !== Comment)
     // 使用 template 包裹的节点 <template v-if="false" />
     .flatMap(node => node.type === Fragment ? node.children : node)
+    .filter((node: any) => node.type !== Comment)
     .map((node: any) => ({
       ...node.props,
       node,

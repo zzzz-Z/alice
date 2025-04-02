@@ -273,7 +273,7 @@ defineExpose(forwardRef(table, {
         <el-button type="primary" @click="query">
           查询
         </el-button>
-        <el-button v-if="slots.search!().length >= 3" link type="primary" @click="toggle()">
+        <el-button v-if="slots.search!().length >= 4" link type="primary" @click="toggle()">
           {{ !isUnfold ? '展开' : '收起' }}
           <el-icon class="el-icon--right">
             <ArrowDown v-if="!isUnfold" />

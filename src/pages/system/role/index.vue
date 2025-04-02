@@ -36,7 +36,7 @@ function openEdit(row?: any) {
     width: '500px',
     title: row ? '编辑' : '新增',
     render: () => <Edit row={row} />,
-    afterSave: () => table.value.getData(),
+    afterSave: () => table.value?.getData(),
   }) // 打开编辑页面
 }
 
@@ -50,7 +50,7 @@ function bindPermission(row?: any) {
   createDialog({
     width: 400,
     title: '绑定权限',
-    afterSave: table.value.getData,
+    afterSave: table.value?.getData,
     render: () => (
       <i-form span={24} model={model}>
         <el-tree-select
@@ -80,7 +80,7 @@ async function del(row?: Params) {
   })
   const res = await api.del(row)
   if (!res.error) {
-    table.value.getData()
+    table.value?.getData()
     ElMessage.success('删除成功。')
   }
 }

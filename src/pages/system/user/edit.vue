@@ -31,7 +31,7 @@ defineExpose({ save, form })
 </script>
 
 <template>
-  <IForm ref="form" :model="model" :span="24">
+  <IForm ref="form" :model="model">
     <el-input
       v-model="model.username"
       required
