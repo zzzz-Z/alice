@@ -300,6 +300,9 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "createContextmenu": true
+    "createContextmenu": true,
+    "ImportParams": true,
+    "Slot": true,
+    "Slots": true
   }
 }

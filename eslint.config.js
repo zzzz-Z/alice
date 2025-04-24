@@ -4,7 +4,7 @@ export default antfu({
   unocss: true,
   typescript: true,
   vue: true,
-  lessOpinionated: true,
+  // lessOpinionated: true,
   plugins: [],
   formatters: {
     css: true,

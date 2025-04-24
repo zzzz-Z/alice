@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ImportParams } from './index'
-import { ElMessage } from 'element-plus'
+import type { ImportParams } from './index';
+import { ElMessage } from 'element-plus';
 
 const props = defineProps<ImportParams>()
 
@@ -37,7 +37,7 @@ defineExpose({ save })
       将文件拖到此处，或点击上传
     </div>
     <template #tip>
-      <div class="text-center el-upload__tip">
+      <div class="el-upload__tip text-center">
         <span v-if="accept">仅允许导入{{ accept }}格式文件。</span>
         <el-link
           v-if="props.template"

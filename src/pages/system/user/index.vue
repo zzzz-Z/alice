@@ -13,7 +13,9 @@ ctx.proxy!.test = '1'
 const columns = ref<ITableColumn[]>([
   { label: '用户名', prop: 'username' },
   { label: '角色', prop: 'role' },
+  { label: '手机号', prop: 'phone' },
   { label: '邮箱', prop: 'email' },
+  { label: '状态', prop: 'status', render: ({ row }) => <a href='zcc' download>aaa</a> },
   {
     label: '创建时间',
     prop: 'created_ts',

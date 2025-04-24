@@ -3,6 +3,7 @@ const form = ref<IFormInstance>()
 const model = reactive<Params>({
   name: '',
   ids: [],
+  phone: '',
 })
 
 onMounted(() => {

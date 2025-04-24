@@ -6,7 +6,10 @@ import * as api from '@/api/user';
 const props = defineProps<{ row: Params }>()
 
 const form = ref<FormInstance>()
-const model = reactive<Params>({ ...props.row })
+const model = reactive<Params>({
+  ...props.row,
+  user: { name: '' }
+})
 const [roles] = useAsyncData(role.getList, {
   transform: d => ({
     label: d.name,
@@ -33,7 +36,7 @@ defineExpose({ save, form })
 <template>
   <IForm ref="form" :model="model">
     <el-input
-      v-model="model.username"
+      v-model="model.user.name"
       required
       label="用户名"
     />
@@ -41,7 +44,7 @@ defineExpose({ save, form })
       v-if="!row"
       v-model="model.password"
       required
-      label="密码"
+      label="密码1"
       type="password"
       show-password
     />

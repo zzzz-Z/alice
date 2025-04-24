@@ -133,6 +133,8 @@ export function createDialog({
 
   const node = h(ElConfigProvider, { locale: zhCn }, dialog)
 
+  node.appContext = appContext
+
   render(node, div)
 
   return {

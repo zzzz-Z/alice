@@ -60,12 +60,16 @@ function formatItemProps({ rule, required, validator, ..._props }: FormItemOptio
   const propsKeys = Object.keys(formItemProps)
   const _required = !isUndefined(required) && required !== false
 
-  const prop = (_props as any)['onUpdate:modelValue']
-    ?.toString()
-    .replace(/\(\$event\)\s*=>\s*\$setup\.|\s*=\s*\$event/g, '')
-    .split('.')
-    .slice(1)
-    .join('.')
+  const modelValueString = (_props as any)['onUpdate:modelValue']?.toString()
+  const prop = modelValueString && modelValueString.includes('=>')
+    ? modelValueString
+        .split('=>')[1]
+        .split('=')[0]
+        .trim()
+        .split('.')
+        .slice(import.meta.env.DEV ? 2 : 1)
+        .join('.')
+    : ''
 
   const rules = removeUndefinedProps({
     message: _required && !validator ? getPlaceholder(_props) : undefined,
