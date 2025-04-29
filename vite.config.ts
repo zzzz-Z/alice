@@ -24,7 +24,7 @@ export default defineConfig({
       dts: 'types/auto-imports.d.ts',
       imports: ['vue', '@vueuse/core'],
       dirs: ['src/hooks/**', 'src/utils/**'],
-      eslintrc: { enabled: true, filepath: './types/.eslintrc-auto-import.json' },
+      eslintrc: { enabled: true, filepath: 'types/.eslintrc-auto-import.json' },
       resolvers: [ElementPlusResolver()],
     }),
     Components({

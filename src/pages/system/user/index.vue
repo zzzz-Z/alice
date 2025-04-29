@@ -4,15 +4,16 @@ import { IForm, ISelect } from '@/components'
 import { createDialog } from '@/hooks/create-dialog'
 import { dayjs, ElMessage, ElMessageBox } from 'element-plus'
 import Edit from './edit.vue'
+import { saveAs } from 'file-saver'
 
 const table = ref<ITableInstance>()
 const queryParams = reactive<Params>({})
-const ctx = getCurrentInstance()!
+const ctx = getCurrentInstance()! 
 ctx.proxy!.test = '1'
 
 const columns = ref<ITableColumn[]>([
   { label: '用户名', prop: 'username' },
-  { label: '角色', prop: 'role' },
+  { label: '角色', prop: 'role' }, 
   { label: '手机号', prop: 'phone' },
   { label: '邮箱', prop: 'email' },
   { label: '状态', prop: 'status', render: ({ row }) => <a href='zcc' download>aaa</a> },
