@@ -13,7 +13,7 @@ const options = computed(() => router.options.routes)
   <el-container class="page-container">
     <div :style="{ width: !collapse ? '255px' : '65px' }" class="aside">
       <div class="flex items-center h-50px px-10px">
-        知识图谱
+        title
       </div>
       <el-menu router :collapse="collapse" class="router-menu">
         <el-menu-item v-for="(item, n) in options" :key="n" :index="item.path">

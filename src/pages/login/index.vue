@@ -12,15 +12,6 @@ const form = reactive<LoginForm>({
   password: '',
 })
 
-const rules = reactive({
-  username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-  ],
-  password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-  ],
-})
-
 const loginForm = ref<FormInstance>()
 
 async function handleLogin() {
@@ -31,10 +22,6 @@ async function handleLogin() {
 
 <template>
   <div class="login-container">
-    <!-- 粒子背景 -->
-    <div class="particles-background" />
-
-    <!-- 登录卡片 -->
     <el-card class="login-card">
       <h2 class="title">
         登录
@@ -43,7 +30,6 @@ async function handleLogin() {
       <el-form
         ref="loginForm"
         :model="form"
-        :rules="rules"
         label-width="auto"
         class="login-form"
         @submit.prevent="handleLogin"
@@ -91,13 +77,6 @@ async function handleLogin() {
   align-items: center;
   position: relative;
   overflow: hidden;
-}
-
-.particles-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  animation: particleFlow 20s linear infinite;
 }
 
 .login-card {

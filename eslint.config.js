@@ -4,12 +4,8 @@ export default antfu({
   unocss: true,
   typescript: true,
   vue: true,
-  // lessOpinionated: true,
   plugins: [],
-  formatters: {
-    css: true,
-    html: true
-  },
+  formatters: true,
   rules: {
     '@typescript-eslint/no-unused-vars': 'warn',
     'no-console': 'warn',

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { FormInstance, FormProps } from 'element-plus'
-import type { ConcreteComponent, Slot, VNode } from 'vue'
-import { InfoFilled } from '@element-plus/icons-vue'
 import { formItemProps } from 'element-plus'
-import { isString, isUndefined } from 'lodash'
+import type { ConcreteComponent, Slot, VNode } from 'vue'
 import { cloneVNode, Comment, Fragment } from 'vue'
+import { InfoFilled } from '@element-plus/icons-vue'
+import { isString, isUndefined } from 'lodash'
 
 type Props = Partial<FormProps> & {
   options?: FormItemOption[]
@@ -35,8 +35,7 @@ function getPlaceholder(_props: FormItemOption) {
   const componentName = (node.type as ConcreteComponent).name?.toLocaleLowerCase()
   const prefix = componentName ? (componentName?.includes('input') ? '请输入' : '请选择') : ''
   const label = _props.label || node.props?.label
-  const placeholder = node.props?.placeholder || (prefix ? prefix + label : '')
-  return placeholder
+  return node.props?.placeholder || (prefix ? prefix + label : '')
 }
 
 /**
